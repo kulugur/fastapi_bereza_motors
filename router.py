@@ -65,7 +65,7 @@ def get_brand(brend: str):
         key = 0
         for brands in templates:
             key += 1
-            if brands["Manufacturer"] == brend:
+            if brands["Manufacturer"] == brend or brend == 'all':
                 brands["key"] = key
                 detail.append(brands)
 
