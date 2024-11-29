@@ -9,7 +9,7 @@ from fastapi import FastAPI, Depends, Body
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
-
+from starlette.middleware.cors import CORSMiddleware
 
 from auth.database import create_db_and_tables, User
 
@@ -27,7 +27,7 @@ app = FastAPI(
     title="Bereza_Motors",
     lifespan=lifespan
 )
-app.add_middleware(HTTPSRedirectMiddleware)
+
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
     [auth_backend],
@@ -66,8 +66,6 @@ current_user = fastapi_users.current_user()
 def protected_route(user: User = Depends(current_user)):
 
     return f"Hello, {user.phone}"
-
-
 origins = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
@@ -79,11 +77,29 @@ origins = [
     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app"
     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app:80",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["OPTIONS", "HEAD", "GET", "POST"],
-    allow_headers=["Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type", "Authorization" ],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+# origins = [
+#     "http://127.0.0.1:3000",
+#     "http://localhost:3000",
+#     "https://10.214.145.197:0"
+#     "https://10.214.145.197:80"
+#     "https://10.214.145.197"
+#     "http://10.214.145.197"
+#     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app/"
+#     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app"
+#     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app:80",
+# ]
+#
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["OPTIONS", "HEAD", "GET", "POST"],
+#     allow_headers=["Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type", "Authorization" ],
+# )
