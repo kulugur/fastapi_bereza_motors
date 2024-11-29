@@ -8,7 +8,7 @@ from router import router as user_router
 from fastapi import FastAPI, Depends, Body
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 
 from auth.database import create_db_and_tables, User
@@ -27,7 +27,7 @@ app = FastAPI(
     title="Bereza_Motors",
     lifespan=lifespan
 )
-
+app.add_middleware(HTTPSRedirectMiddleware)
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
     [auth_backend],
