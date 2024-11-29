@@ -69,7 +69,7 @@ def protected_route(user: User = Depends(current_user)):
 origins = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    "https://next-bereza-motors-mflu-dmuxns32p-igors-projects-facaa7af.vercel.app/",
+    "http://45.153.189.247:3000",
 
 ]
 app.add_middleware(
