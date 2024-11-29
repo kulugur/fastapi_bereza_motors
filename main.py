@@ -71,6 +71,7 @@ def protected_route(user: User = Depends(current_user)):
 origins = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app"
     "https://next-bereza-motors-6spf-ld880cv4n-igors-projects-facaa7af.vercel.app:80",
 ]
 
