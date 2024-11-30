@@ -998,5 +998,26 @@
         "Year": null,
         "Warehouse": null,
         "guide": null
+    },
+    {
+        "Category": "Кузов внутри",
+        "Manufacturer": "Bmw",
+        "Model": "Bmw",
+        "Manufacturer_Model": "Bmw",
+        "Name_without_use": "Стеклоподъемник электр. задний левый",
+        "Product_name": "Стеклоподъемник электр. задний левый Mazda Mazda 3 (BL) 2009-2013",
+        "Price": "1000",
+        "Image": "https://i04.softrazborki.net/px1j4rd8/5",
+        "OEM": null,
+        "Part_code": null,
+        "Note": null,
+        "Compatibility": null,
+        "Substitutions": null,
+        "Title_Images": null,
+        "Title_page": null,
+        "Year": null,
+        "Warehouse": null,
+        "guide": null
     }
+
 ]
