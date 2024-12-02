@@ -25,7 +25,15 @@ async def read_me(user: User = Depends(current_user)):
     }
 
     return user_data
-
+@router.get("/Name_without_use/{key}")
+def get_detal(key: str):
+    with open('sample.json', encoding='utf-8') as f:
+        file_content = f.read()
+        templates = json.loads(file_content)
+    for detal in templates:
+        if detal["key"] == key:
+            return detal
+    return []
 @router.get("/brands")
 def get_brands():
 
@@ -33,19 +41,19 @@ def get_brands():
         file_content = f.read()
         templates = json.loads(file_content)
         all_brends = [{
-            "key": '0',
+            "key": 0,
             "Manufacturer": "",
             "Model": []
         }]
-    key = 0
+
     for brands in templates:
-        key += 1
+
         all_model = []
         for model in all_brends:
             all_model.append(model["Manufacturer"])
         if brands["Manufacturer"] not in all_model:
             all_brends.append({
-                "key": key,
+                "key": brands["key"],
                 "Manufacturer": brands["Manufacturer"],
                 "Model": []
             })
@@ -62,11 +70,11 @@ def get_brand(brend: str):
         file_content = f.read()
         templates = json.loads(file_content)
         detail = []
-        key = 0
+
         for brands in templates:
-            key += 1
+
             if brands["Manufacturer"] == brend or brend == 'All':
-                brands["key"] = key
+
                 detail.append(brands)
 
     return detail
