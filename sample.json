@@ -1,26 +1,5 @@
 [
     {
-        "key": "1",
-        "Category": "Категория (Номер/ID/Название)",
-        "Manufacturer": "Производитель",
-        "Model": "Модель",
-        "Manufacturer_Model": "Производитель(модель)",
-        "Name_without_use": "Наименование без применения",
-        "Product_name": "Наименование товара",
-        "Price": "Цена",
-        "Image": "Изображение",
-        "OEM": "ОЕМ",
-        "Part_code": "Код детали",
-        "Note": "Примечание",
-        "Compatibility": "Совместимость",
-        "Substitutions": "Замены",
-        "Title_Images": "Title Изображения",
-        "Title_page": "Title страницы",
-        "Year": "Год",
-        "Warehouse": "Склад",
-        "guide": "guid"
-    },
-    {
         "key": "2",
         "Category": "Кузовные стёкла",
         "Manufacturer": "Renault",
