@@ -26,34 +26,39 @@ async def read_me(user: User = Depends(current_user)):
 
     return user_data
 
-
+@router.get("/del_basket")
+def del_basket(user: User = Depends(current_user)):
+    basket_new = []
+    with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
+        json.dump(basket_new, file)
+    return []
 @router.get("/get_basket")
 def get_basket(user: User = Depends(current_user)):
     try:
-        with open("Basket/" + user.email, encoding='utf-8') as f:
+        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
             file_content = f.read()
             basket = json.loads(file_content)
     except FileNotFoundError:
         basket_new = []
-        with open("Basket/" + user.email, "w", encoding="utf-8") as file:
+        with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
             json.dump(basket_new, file)
 
-        with open("Basket/" + user.email, encoding='utf-8') as f:
+        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
             file_content = f.read()
             basket = json.loads(file_content)
     return basket
 @router.get("/set_basket/{key}")
 def set_basket(key: str, user: User = Depends(current_user)):
     try:
-        with open("Basket/" + user.email, encoding='utf-8') as f:
+        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
             file_content = f.read()
             basket = json.loads(file_content)
     except FileNotFoundError:
         basket_new = []
-        with open("Basket/" + user.email, "w", encoding="utf-8") as file:
+        with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
             json.dump(basket_new, file)
 
-        with open("Basket/" + user.email, encoding='utf-8') as f:
+        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
             file_content = f.read()
             basket = json.loads(file_content)
 
@@ -66,11 +71,11 @@ def set_basket(key: str, user: User = Depends(current_user)):
             for basket_detal in basket:
                 if basket_detal["key"] == key:
                     basket_detal["quantity"] += 1
-                    with open("Basket/" + user.email, "w", encoding="utf-8") as file:
+                    with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
                         json.dump(basket, file, ensure_ascii=False, indent=4)
                     return
             basket.append(detal)
-            with open("Basket/" + user.email, "w", encoding="utf-8") as file:
+            with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
                 json.dump(basket, file, ensure_ascii=False, indent=4 )
 
 

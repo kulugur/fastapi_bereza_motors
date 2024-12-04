@@ -1,4 +1,5 @@
-[   {
+[
+    {
         "key": "7",
         "Category": "Кузов внутри",
         "Manufacturer": "Ford",
@@ -18,6 +19,6 @@
         "Year": "",
         "Warehouse": "",
         "guide": "",
-        "quantity": 6
+        "quantity": 4
     }
 ]
