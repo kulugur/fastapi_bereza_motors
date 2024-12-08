@@ -7,6 +7,7 @@ from fastapi_users import FastAPIUsers
 from auth.auth import auth_backend
 from auth.database import User
 from auth.manager import get_user_manager
+from basket import basket_json, set_basket_json, del_basket_json
 
 router = APIRouter()
 fastapi_users = FastAPIUsers[User, int](
@@ -34,52 +35,18 @@ def del_basket(user: User = Depends(current_user)):
     return []
 @router.get("/get_basket")
 def get_basket(user: User = Depends(current_user)):
-    try:
-        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
-            file_content = f.read()
-            basket = json.loads(file_content)
-    except FileNotFoundError:
-        basket_new = []
-        with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
-            json.dump(basket_new, file)
+    return basket_json(user.email)
+@router.get("/del_basket/{key}")
+def del_basket_key(key: str, user: User = Depends(current_user)):
 
-        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
-            file_content = f.read()
-            basket = json.loads(file_content)
-    return basket
+    basket = basket_json(user.email)
+    del_basket_json(basket, user.email, key)
+
 @router.get("/set_basket/{key}")
 def set_basket(key: str, user: User = Depends(current_user)):
-    try:
-        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
-            file_content = f.read()
-            basket = json.loads(file_content)
-    except FileNotFoundError:
-        basket_new = []
-        with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
-            json.dump(basket_new, file)
 
-        with open(f"Basket/{user.email}.json", encoding='utf-8') as f:
-            file_content = f.read()
-            basket = json.loads(file_content)
-
-    with open('sample.json', encoding='utf-8') as f:
-        file_content = f.read()
-        templates = json.loads(file_content)
-    for detal in templates:
-        detal["quantity"] = 1
-        if detal["key"] == key:
-            for basket_detal in basket:
-                if basket_detal["key"] == key:
-                    basket_detal["quantity"] += 1
-                    with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
-                        json.dump(basket, file, ensure_ascii=False, indent=4)
-                    return
-            basket.append(detal)
-            with open(f"Basket/{user.email}.json", "w", encoding="utf-8") as file:
-                json.dump(basket, file, ensure_ascii=False, indent=4 )
-
-
-    return detal
+    basket = basket_json(user.email)
+    set_basket_json(basket, user.email, key)
 @router.get("/Name_without_use/{key}")
 def get_detal(key: str):
     with open('sample.json', encoding='utf-8') as f:
