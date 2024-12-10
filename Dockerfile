@@ -1,4 +1,5 @@
-FROM python:3.12
-COPY . .
+FROM python:3.12-slim
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port","80" ]
+COPY . .
+CMD ["python", "main.py" ]
